@@ -6,14 +6,14 @@
   >
 </template>
 
-<script>
-import {defineComponent, ref} from "vue";
+<script lang="ts">
+import {defineComponent} from "vue";
 
 export default defineComponent({
   name: 'Animal',
   props: {
     name: {
-      type:String,
+      type: String,
       required: true
     },
     image: {

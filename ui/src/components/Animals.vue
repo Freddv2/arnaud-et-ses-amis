@@ -5,7 +5,7 @@
   />
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import Animal from "./Animal.vue";
 import * as animalsData from '../data/animals.json'
@@ -13,7 +13,7 @@ import * as animalsData from '../data/animals.json'
 export default defineComponent({
   name: "Animals",
   components: {Animal},
-  setup() {
+  setup: () => {
     const animals = animalsData.animals
     const currentAnimal = animals[0]
     console.log(animals)
