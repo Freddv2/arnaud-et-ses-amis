@@ -1,0 +1,46 @@
+{
+  "animals" : [
+    {
+      "name": "Âne",
+      "image": "ane.png"
+    },
+    {
+      "name": "Canard",
+      "image": "canard.png"
+    },
+    {
+      "name": "Chat",
+      "image": "chat.png"
+    },
+    {
+      "name": "Cheval",
+      "image": "cheval.png"
+    },
+    {
+      "name": "Chevre",
+      "image": "chevre.png"
+    },
+    {
+      "name": "Chien",
+      "image": "chien.png"
+    },    {
+      "name": "Cochon",
+      "image": "cochon.png"
+    },
+    {
+      "name": "Coq",
+      "image": "coq.png"
+    },
+    {
+      "name": "Lapin",
+      "image": "lapin.png"
+    },
+    {
+      "name": "Mouton",
+      "image": "mouton.png"
+    },    {
+      "name": "Vache",
+      "image": "vache.png"
+    }
+  ]
+}
