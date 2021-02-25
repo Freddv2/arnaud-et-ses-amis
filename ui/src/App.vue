@@ -1,5 +1,5 @@
 <template>
-  <Animals/>
+   <animals/>
 </template>
 
 <script lang="ts">

@@ -1,0 +1,9 @@
+body {
+    margin: 1rem 0;
+}
+
+.carousel-item {
+    display: block;
+    width: 100%;
+    transition-duration: 0s;
+}

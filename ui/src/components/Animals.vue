@@ -1,43 +1,24 @@
 <template>
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <Animal
-            :image="animals[animalIndex].image"
-            :name="animals[animalIndex].name"
-        />
-      </div>
-      <a class="carousel-control-prev" data-slide="prev" href="#carouselExampleControls" role="button" @click.prevent="prev">
-        <span aria-hidden="true" class="carousel-control-prev-icon"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" data-slide="next" href="#carouselExampleControls" role="button" @click.prevent="next">
-        <span aria-hidden="true" class="carousel-control-next-icon"></span>
-        <span class="sr-only">Next</span>
-      </a>
+      <animal v-for="animal in animals" :key="animal.id" :active="animal.active" :directionClass="directionClass" :image="animal.image" :name="animal.name"></animal>
     </div>
-
-  </div>
-  <div class="row">
-    <div class="column">
-      <button @click="previousAnimals"/>
-    </div>
-    <div class="column">
-
-    </div>
-    <div class="column">
-      <button @click="nextAnimals"/>
-    </div>
+    <a class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls" type="button" @click.prevent="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleControls" type="button" @click.prevent="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import {defineComponent, ref} from "vue";
 import Animal from "./Animal.vue";
 import * as animalsData from '../data/animals.json'
 
 export default defineComponent({
-  name: "Animals",
+  name: "animals",
   components: {Animal},
   setup: () => {
     //add the active property for the carousel. Set the first animal to active
@@ -71,7 +52,7 @@ export default defineComponent({
       directionClass.value = 'slide-next';
     }
 
-    return {animals, prev, next}
+    return {animals, directionClass, prev, next}
   }
 })
 </script>

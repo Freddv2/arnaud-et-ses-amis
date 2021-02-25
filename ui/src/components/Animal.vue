@@ -1,30 +1,17 @@
 <template>
-  <h1>{{ name }}</h1> 
-  <img
-    :src="image"
-    alt=""
-  >
+  <transition name="slide">
+    <div v-show="active" :class="directionClass" class="carousel-item">
+      <img :alt="name" :src="image">
+    </div>
+  </transition>
 </template>
 
-<script lang="ts">
+<script>
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: 'Animal',
-  props: {
-    name: {
-      type: String,
-      required: true
-    },
-    image: {
-      type: String,
-      required: true
-    },
-    soundURL: { 
-      type: String,
-      required: false
-    }
-  },
+  name: 'animal',
+  props: ['name', 'image', 'active', 'directionClass'],
   setup: (props) => {
     console.log(props)
   }
