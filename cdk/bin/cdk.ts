@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import {CdkStack} from '../lib/cdk-stack';
+import {ArnaudEtSesAmisStack} from '../lib/arnaud-et-ses-amis-stack';
 
 const app = new cdk.App();
-new CdkStack(app, 'CdkStack');
+new ArnaudEtSesAmisStack(app, 'ArnaudEtSesAmisStack', {
+    env: {
+        account: process.env.CDK_DEFAULT_ACCOUNT,
+        region: process.env.CDK_DEFAULT_REGION
+    }
+})
