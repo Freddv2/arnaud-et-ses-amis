@@ -1,8 +1,10 @@
 <template>
-   <animals/>
+  <div class="container-fluid px-0">
+    <animals/>
+  </div>
 </template>
 
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 import Animals from "./components/Animals.vue";
 import HelloWorld from "./components/HelloWorld.vue";

@@ -2,7 +2,7 @@
   "animals" : [
     {
       "id": 0,
-      "name": "Ane",
+      "name": "Âne",
       "image": "ane.png"
     },
     {
@@ -22,7 +22,7 @@
     },
     {
       "id": 4,
-      "name": "Chevre",
+      "name": "Chèvre",
       "image": "chevre.png"
     },
     {

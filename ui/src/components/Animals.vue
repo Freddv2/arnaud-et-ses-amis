@@ -1,14 +1,19 @@
 <template>
-  <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <animal v-for="animal in animals" :key="animal.id" :active="animal.active" :directionClass="directionClass" :image="animal.image" :name="animal.name"></animal>
+  <div>
+    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <animal v-for="animal in animals" :key="animal.id" :active="animal.active" :directionClass="directionClass"
+                :image="animal.image" :name="animal.name"></animal>
+      </div>
+      <a class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls" type="button"
+         @click.prevent="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleControls" type="button"
+         @click.prevent="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
     </div>
-    <a class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls" type="button" @click.prevent="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleControls" type="button" @click.prevent="next">
-      <span class="carousel-control-next-icon"></span>
-    </a>
   </div>
 </template>
 
