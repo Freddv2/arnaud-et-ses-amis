@@ -3,57 +3,68 @@
     {
       "id": 0,
       "name": "Âne",
-      "image": "ane.png"
+      "image": "ane.png",
+      "sound": "ane.mp3"
     },
     {
       "id": 1,
       "name": "Canard",
-      "image": "canard.png"
+      "image": "canard.png",
+      "sound": "canard.mp3"
     },
     {
       "id": 2,
       "name": "Chat",
-      "image": "chat.png"
+      "image": "chat.png",
+      "sound": "chat.mp3"
     },
     {
       "id": 3,
       "name": "Cheval",
-      "image": "cheval.png"
+      "image": "cheval.png",
+      "sound": "cheval.mp3"
     },
     {
       "id": 4,
       "name": "Chèvre",
-      "image": "chevre.png"
+      "image": "chevre.png",
+      "sound": "chevre.mp3"
     },
     {
       "id": 5,
       "name": "Chien",
-      "image": "chien.png"
+      "image": "chien.png",
+      "sound": "chien.mp3"
     },
     {
       "id": 6,
       "name": "Cochon",
-      "image": "cochon.png"
+      "image": "cochon.png",
+      "sound": "cochon.mp3"
     },
     {
       "id": 7,
       "name": "Coq",
-      "image": "coq.png"
+      "image": "coq.png",
+      "sound": "coq.mp3"
     },
     {
       "id": 8,
       "name": "Lapin",
-      "image": "lapin.png"
+      "image": "lapin.png",
+      "sound": "lapin.mp3"
     },
     {
       "id": 9,
       "name": "Mouton",
-      "image": "mouton.png"
+      "image": "mouton.png",
+      "sound": "mouton.mp3"
     },
     {
       "id": 10,
       "name": "Vache",
-      "image": "vache.png"
+      "image": "vache.png",
+      "sound": "vache.mp3"
     }
   ]
 }

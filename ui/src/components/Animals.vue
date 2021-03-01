@@ -3,7 +3,7 @@
     <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <animal v-for="animal in animals" :key="animal.id" :active="animal.active" :directionClass="directionClass"
-                :image="animal.image" :name="animal.name"></animal>
+                :image="animal.image" :name="animal.name" :sound="animal.sound"></animal>
       </div>
       <a class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls" type="button"
          @click.prevent="prev">
