@@ -1,70 +1,72 @@
-import cloudfront = require('@aws-cdk/aws-cloudfront');
-import route53 = require('@aws-cdk/aws-route53');
-import s3 = require('@aws-cdk/aws-s3');
-import s3deploy = require('@aws-cdk/aws-s3-deployment');
-import acm = require('@aws-cdk/aws-certificatemanager');
-import cdk = require('@aws-cdk/core');
-import targets = require('@aws-cdk/aws-route53-targets');
+import {CfnOutput, Construct, RemovalPolicy, Stack, StackProps} from "@aws-cdk/core";
+import {BucketDeployment, Source} from "@aws-cdk/aws-s3-deployment";
+import {ARecord, HostedZone, RecordTarget} from "@aws-cdk/aws-route53";
+import {Certificate} from "@aws-cdk/aws-certificatemanager";
+import {CloudFrontTarget} from "@aws-cdk/aws-route53-targets";
+import {CloudFrontWebDistribution, OriginProtocolPolicy, SecurityPolicyProtocol, SSLMethod} from "@aws-cdk/aws-cloudfront";
+import {Bucket} from "@aws-cdk/aws-s3";
 
-export class ArnaudEtSesAmisStack extends cdk.Stack {
+export class ArnaudEtSesAmisStack extends Stack {
 
   domainName = 'www.arnaudetsesamis.com'
+  hostedZoneId = 'Z00385751ORUOL1JJ9APG'
+  certificateArn = 'arn:aws:acm:us-east-1:369282510238:certificate/de5d134f-6d61-42de-9f97-b97872423ea6'
 
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const zone = new route53.PublicHostedZone(this, 'Zone', {zoneName: this.domainName});
+    // We lookup the hosted zone into which we will cerate all DNS entries
+    const zone = HostedZone.fromHostedZoneAttributes(this, 'MyZone', {
+      zoneName: this.domainName,
+      hostedZoneId: this.hostedZoneId,
+    });
 
-    new cdk.CfnOutput(this, 'Site', {value: 'https://' + this.domainName});
+    new CfnOutput(this, 'Site', {value: 'https://' + this.domainName});
 
     // Content bucket
-    const siteBucket = new s3.Bucket(this, 'SiteBucket', {
+    const siteBucket = new Bucket(this, 'SiteBucket', {
       bucketName: this.domainName,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'error.html',
       publicReadAccess: true,
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      removalPolicy: RemovalPolicy.DESTROY,
     });
-    new cdk.CfnOutput(this, 'Bucket', {value: siteBucket.bucketName});
+    new CfnOutput(this, 'Bucket', {value: siteBucket.bucketName});
 
     // TLS certificate
-    const certificateArn = new acm.DnsValidatedCertificate(this, 'SiteCertificate', {
-      domainName: this.domainName,
-      hostedZone: zone,
-      region: 'us-east-1', // Cloudfront only checks this region for certificates.
-    }).certificateArn;
-    new cdk.CfnOutput(this, 'Certificate', {value: certificateArn});
+    const cert = Certificate.fromCertificateArn(this, 'Cert', this.certificateArn)
+    new CfnOutput(this, 'Certificate', {value: cert.certificateArn});
 
     // CloudFront distribution that provides HTTPS
-    const distribution = new cloudfront.CloudFrontWebDistribution(this, 'SiteDistribution', {
+    const distribution = new CloudFrontWebDistribution(this, 'SiteDistribution', {
       aliasConfiguration: {
-        acmCertRef: certificateArn,
+        acmCertRef: cert.certificateArn,
         names: [this.domainName],
-        sslMethod: cloudfront.SSLMethod.SNI,
-        securityPolicy: cloudfront.SecurityPolicyProtocol.TLS_V1_1_2016,
+        sslMethod: SSLMethod.SNI,
+        securityPolicy: SecurityPolicyProtocol.TLS_V1_1_2016,
       },
       originConfigs: [
         {
           customOriginSource: {
             domainName: siteBucket.bucketWebsiteDomainName,
-            originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
+            originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
           },
           behaviors: [{isDefaultBehavior: true}],
         }
       ]
     });
-    new cdk.CfnOutput(this, 'DistributionId', {value: distribution.distributionId});
+    new CfnOutput(this, 'DistributionId', {value: distribution.distributionId});
 
     // Route53 alias record for the CloudFront distribution
-    new route53.ARecord(this, 'SiteAliasRecord', {
+    new ARecord(this, 'SiteAliasRecord', {
       recordName: this.domainName,
-      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
       zone
     });
 
     // Deploy site contents to S3 bucket
-    new s3deploy.BucketDeployment(this, 'DeployWithInvalidation', {
-      sources: [s3deploy.Source.asset('./../ui/dist')],
+    new BucketDeployment(this, 'DeployWithInvalidation', {
+      sources: [Source.asset('./../ui/dist')],
       destinationBucket: siteBucket,
       distribution,
       distributionPaths: ['/*'],
