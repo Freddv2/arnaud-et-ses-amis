@@ -1,65 +1,77 @@
 import {CfnOutput, Construct, RemovalPolicy, Stack, StackProps} from "@aws-cdk/core";
 import {BucketDeployment, Source} from "@aws-cdk/aws-s3-deployment";
-import {ARecord, HostedZone, RecordTarget} from "@aws-cdk/aws-route53";
-import {Certificate} from "@aws-cdk/aws-certificatemanager";
+import {ARecord, PublicHostedZone, RecordTarget} from "@aws-cdk/aws-route53";
+import {DnsValidatedCertificate} from "@aws-cdk/aws-certificatemanager";
 import {CloudFrontTarget} from "@aws-cdk/aws-route53-targets";
-import {CloudFrontWebDistribution, OriginProtocolPolicy, SecurityPolicyProtocol, SSLMethod} from "@aws-cdk/aws-cloudfront";
+import {CloudFrontWebDistribution, SecurityPolicyProtocol, SSLMethod} from "@aws-cdk/aws-cloudfront";
 import {Bucket} from "@aws-cdk/aws-s3";
 
 export class ArnaudEtSesAmisStack extends Stack {
 
-  domainName = 'www.arnaudetsesamis.com'
-  hostedZoneId = 'Z00385751ORUOL1JJ9APG'
-  certificateArn = 'arn:aws:acm:us-east-1:369282510238:certificate/de5d134f-6d61-42de-9f97-b97872423ea6'
+  readonly subDomainName = 'www'
+  readonly domainName = 'arnaudetsesamis.com'
+  readonly siteDomain = this.subDomainName + '.' + this.domainName
+  readonly certificateArn = 'arn:aws:acm:us-east-1:369282510238:certificate/de5d134f-6d61-42de-9f97-b97872423ea6'
 
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // We lookup the hosted zone into which we will cerate all DNS entries
-    const zone = HostedZone.fromHostedZoneAttributes(this, 'MyZone', {
+    //After the zone have been created, the NS named Server values in the DNS configuration must be set manually in the registered Domain name Named Server Fields 
+    const zone = new PublicHostedZone(this, 'Hosted Zone', {
       zoneName: this.domainName,
-      hostedZoneId: this.hostedZoneId,
-    });
-
-    new CfnOutput(this, 'Site', {value: 'https://' + this.domainName});
+    })
+    new CfnOutput(this, 'Site', {value: 'https://' + this.siteDomain});
 
     // Content bucket
-    const siteBucket = new Bucket(this, 'SiteBucket', {
-      bucketName: this.domainName,
+    const bucket = new Bucket(this, 'SiteBucket', {
       websiteIndexDocument: 'index.html',
-      websiteErrorDocument: 'error.html',
       publicReadAccess: true,
-      removalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+      removalPolicy: RemovalPolicy.DESTROY
     });
-    new CfnOutput(this, 'Bucket', {value: siteBucket.bucketName});
+    new CfnOutput(this, 'Bucket', {value: bucket.bucketName});
 
     // TLS certificate
-    const cert = Certificate.fromCertificateArn(this, 'Cert', this.certificateArn)
-    new CfnOutput(this, 'Certificate', {value: cert.certificateArn});
+    // TLS certificate
+
+    const certificateArn = new DnsValidatedCertificate(this, 'SiteCertificate', {
+      domainName: this.siteDomain,
+      hostedZone: zone,
+      region: 'us-east-1', // Cloudfront only checks this region for certificates.
+    }).certificateArn;
+    new CfnOutput(this, 'Certificate', {value: certificateArn});
+
 
     // CloudFront distribution that provides HTTPS
     const distribution = new CloudFrontWebDistribution(this, 'SiteDistribution', {
       aliasConfiguration: {
-        acmCertRef: cert.certificateArn,
-        names: [this.domainName],
+        acmCertRef: certificateArn,
+        names: [this.siteDomain],
         sslMethod: SSLMethod.SNI,
         securityPolicy: SecurityPolicyProtocol.TLS_V1_1_2016,
       },
       originConfigs: [
         {
-          customOriginSource: {
-            domainName: siteBucket.bucketWebsiteDomainName,
-            originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
+          s3OriginSource: {
+            //Point to our bucket
+            s3BucketSource: bucket
           },
-          behaviors: [{isDefaultBehavior: true}],
+          behaviors: [{isDefaultBehavior: true}]
+        }
+      ],
+      // On refresh, app return an 403. This config allow us to refresh by redirecting to index.html with a 200 
+      errorConfigurations: [
+        {
+          errorCode: 403,
+          responseCode: 200,
+          responsePagePath: '/index.html'
         }
       ]
     });
     new CfnOutput(this, 'DistributionId', {value: distribution.distributionId});
 
-    // Route53 alias record for the CloudFront distribution
-    new ARecord(this, 'SiteAliasRecord', {
-      recordName: this.domainName,
+    new ARecord(this, 'Site_ARecord', {
+      recordName: this.siteDomain,
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
       zone
     });
@@ -67,9 +79,8 @@ export class ArnaudEtSesAmisStack extends Stack {
     // Deploy site contents to S3 bucket
     new BucketDeployment(this, 'DeployWithInvalidation', {
       sources: [Source.asset('./../ui/dist')],
-      destinationBucket: siteBucket,
-      distribution,
-      distributionPaths: ['/*'],
+      destinationBucket: bucket,
+      distribution: distribution,
     });
   }
 }

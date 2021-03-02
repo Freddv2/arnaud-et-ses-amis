@@ -1,1 +1,6 @@
-{}
+{
+  "hosted-zone:account=369282510238:domainName=arnaudetsesamis.com:region=ca-central-1": {
+    "Id": "/hostedzone/Z00385751ORUOL1JJ9APG",
+    "Name": "arnaudetsesamis.com."
+  }
+}
