@@ -21,15 +21,19 @@
 import {defineComponent, ref} from "vue";
 import Animal from "./Animal.vue";
 import * as animalsData from '../data/animals.json'
+import * as utils from './../utils/utils.js'
 
 export default defineComponent({
   name: "animals",
   components: {Animal},
   setup: () => {
-    //add the active property for the carousel. Set the first animal to active
-    animalsData.animals.forEach((el, i) => el.active = i === 0)
+
     const animals = ref(animalsData.animals)
     let directionClass = ref('')
+
+    const activeIndex = utils.random(0, animals.value.length - 1)
+    //add the active property for the carousel. Set a random animal to active
+    animals.value.forEach((el, i) => el.active = i === activeIndex)
 
     function getActiveIndex() {
       return animals.value.findIndex(el => el.active)
