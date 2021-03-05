@@ -40,7 +40,7 @@ export default defineComponent({
   font-size: 45px;
 }
 
-.carousel-item {
-
+.carousel-item img {
+  min-height: 500px
 }
 </style>

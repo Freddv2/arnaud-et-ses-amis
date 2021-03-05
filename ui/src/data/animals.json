@@ -65,6 +65,24 @@
       "name": "Vache",
       "image": "vache.png",
       "sound": "vache.mp3"
+    },
+    {
+      "id": 11,
+      "name": "Maman",
+      "image": "maman.jpg",
+      "sound": "maman.m4a"
+    },
+    {
+      "id": 12,
+      "name": "Papa",
+      "image": "papa.jpg",
+      "sound": "papa.m4a"
+    },
+    {
+      "id": 13,
+      "name": "Arnaud",
+      "image": "arnaud.jpg",
+      "sound": "arnaud.m4a"
     }
   ]
 }
