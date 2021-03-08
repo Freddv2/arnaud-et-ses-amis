@@ -1,17 +1,21 @@
 <template>
   <div>
-    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <animal v-for="animal in animals" :key="animal.id" :active="animal.active" :directionClass="directionClass"
                 :image="animal.image" :name="animal.name" :sound="animal.sound"></animal>
       </div>
-      <a class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls" type="button"
+      <a class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls"
          @click.prevent="prev">
-        <span class="carousel-control-prev-icon"></span>
+        <span style="font-size: 100px; color: black;">
+         <i class="fas fa-angle-left"></i>
+        </span>
       </a>
-      <a class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleControls" type="button"
+      <a class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleControls"
          @click.prevent="next">
-        <span class="carousel-control-next-icon"></span>
+        <span style="font-size: 100px; color: black;">
+         <i class="fas fa-angle-right"></i>
+        </span>
       </a>
     </div>
   </div>
@@ -67,5 +71,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
 </style>

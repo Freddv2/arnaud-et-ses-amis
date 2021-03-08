@@ -1,10 +1,11 @@
 <template>
     <div v-show="active" :class="directionClass"
          class="carousel-item align-items-center justify-content-center max-he">
-      <img :alt="name" :src="imgPath">
       <div class="carousel-caption">
         {{ name }}
       </div>
+      <img :alt="name" :src="imgPath">
+      <br/><br/>
       <div class="d-grid col-3 mx-auto">
         <button class="btn btn-primary btn-lg" type="button" @click="playSound">
           <i class="fas fa-volume-up" style="font-size: 3em;"></i>
@@ -36,11 +37,15 @@ export default defineComponent({
 <style scoped>
 .carousel-caption {
   position: revert;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  padding-top: revert;
   font-size: 45px;
+  font-family: 'Verdana', serif;
+  color: black
 }
 
 .carousel-item img {
-  min-height: 500px
+  height: 420px;
+  max-width: 100%;
 }
+
 </style>
