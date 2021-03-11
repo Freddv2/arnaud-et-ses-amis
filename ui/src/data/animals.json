@@ -83,6 +83,30 @@
       "name": "Arnaud",
       "image": "arnaud.jpg",
       "sound": "arnaud.m4a"
+    },
+    {
+      "id": 14,
+      "name": "Hippo",
+      "image": "hippo.jpg",
+      "sound": "hippo.mp3"
+    },
+    {
+      "id": 15,
+      "name": "Poisson",
+      "image": "poisson.jpg",
+      "sound": "poisson.m4a"
+    },
+    {
+      "id": 16,
+      "name": "Singe",
+      "image": "singe.jpg",
+      "sound": "singe.m4a"
+    },
+    {
+      "id": 17,
+      "name": "Sorcière",
+      "image": "sorciere.jpg",
+      "sound": "sorciere.m4a"
     }
   ]
 }
