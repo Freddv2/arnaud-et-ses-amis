@@ -88,7 +88,7 @@
       "id": 14,
       "name": "Hippo",
       "image": "hippo.jpg",
-      "sound": "hippo.mp3"
+      "sound": "hippo.m4a"
     },
     {
       "id": 15,
@@ -107,6 +107,12 @@
       "name": "Sorcière",
       "image": "sorciere.jpg",
       "sound": "sorciere.m4a"
+    },
+    {
+      "id": 18,
+      "name": "Poule",
+      "image": "poule.jpg",
+      "sound": "poule.m4a"
     }
   ]
 }
