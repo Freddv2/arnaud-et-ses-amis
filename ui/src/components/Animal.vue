@@ -23,13 +23,12 @@ export default defineComponent({
   props: ['name', 'image', 'sound', 'active', 'directionClass'],
   setup: (props) => {
     const imgPath = computed(() => 'assets/images/' + props.image)
-    const soundPath = computed(() => 'assets/sounds/' + props.sound)
 
     function playSound() {
-      new Audio(soundPath.value).play()
+      props.sound.play()
     }
 
-    return {imgPath, soundPath, playSound}
+    return {imgPath, playSound}
   }
 })
 </script>
