@@ -3,7 +3,7 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <animal v-for="animal in animals" :key="animal.id" :active="animal.active" :directionClass="directionClass"
-                :image="animal.image" :name="animal.name" :sound="animal.sound"></animal>
+                :image="animal.image" :name="animal.name" :sound="animal.loadedSound"></animal>
       </div>
       <a class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleControls"
          @click.prevent="prev">
@@ -64,6 +64,12 @@ export default defineComponent({
       animals.value[newActiveIndex].active = true
       directionClass.value = 'slide-next';
     }
+
+    animals.value.forEach(el => {
+      let audio = new Audio('assets/sounds/' + el.sound)
+      audio.preload = 'auto'
+      el.loadedSound = audio
+    })
 
     return {animals, directionClass, prev, next}
   }

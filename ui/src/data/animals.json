@@ -113,6 +113,12 @@
       "name": "Poule",
       "image": "poule.jpg",
       "sound": "poule.m4a"
+    },
+    {
+      "id": 19,
+      "name": "Lion",
+      "image": "lion.jpg",
+      "sound": "lion.m4a"
     }
   ]
 }
