@@ -26,5 +26,6 @@ export default defineComponent({
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  touch-action: none;
 }
 </style>
