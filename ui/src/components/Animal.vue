@@ -43,8 +43,7 @@ export default defineComponent({
 }
 
 .carousel-item img {
-  height: 420px;
-  max-width: 100%;
+  max-height: 430px;
 }
 
 </style>
