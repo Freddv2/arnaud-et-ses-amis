@@ -66,9 +66,11 @@ export default defineComponent({
     }
 
     animals.value.forEach(el => {
-      let audio = new Audio('assets/sounds/' + el.sound)
-      audio.preload = 'auto'
-      el.loadedSound = audio
+      if (el.sound) {
+        let audio = new Audio('assets/sounds/' + el.sound)
+        audio.preload = 'auto'
+        el.loadedSound = audio
+      }
     })
 
     return {animals, directionClass, prev, next}
