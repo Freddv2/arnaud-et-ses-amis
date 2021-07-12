@@ -28,4 +28,23 @@ export default defineComponent({
   user-select: none;
   touch-action: none;
 }
+
+html, body {
+  height: 100%;
+}
+
+.carousel, .item, .active {
+  height: 100%;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  max-height: 430px;
+  max-width: 430px;
+}
 </style>
