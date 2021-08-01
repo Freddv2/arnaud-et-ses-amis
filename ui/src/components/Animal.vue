@@ -6,7 +6,7 @@
       </div>
       <img :alt="name" :src="imgPath">
       <br/><br/>
-      <div class="d-grid col-3 mx-auto">
+      <div v-if="hasSound()" class="d-grid col-3 mx-auto">
         <button class="btn btn-primary btn-lg" type="button" @click="playSound">
           <i class="fas fa-volume-up" style="font-size: 3em;"></i>
         </button>
@@ -27,8 +27,12 @@ export default defineComponent({
     function playSound() {
       props.sound.play()
     }
+    
+    function hasSound() {
+      return props.sound
+    }
 
-    return {imgPath, playSound}
+    return {imgPath, playSound, hasSound}
   }
 })
 </script>

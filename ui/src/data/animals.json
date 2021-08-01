@@ -119,6 +119,111 @@
       "name": "Lion",
       "image": "lion.jpg",
       "sound": "lion.m4a"
+    },
+    {
+      "id": 20,
+      "name": "Ballon",
+      "image": "ballon.jpg"
+    },
+    {
+      "id": 21,
+      "name": "Porte",
+      "image": "porte.png"
+    },
+    {
+      "id": 22,
+      "name": "Hibou",
+      "image": "hibou.png"
+    },
+    {
+      "id": 23,
+      "name": "Guitare",
+      "image": "guitare.png"
+    },
+    {
+      "id": 24,
+      "name": "Fan",
+      "image": "fan.png"
+    },
+    {
+      "id": 25,
+      "name": "Eau",
+      "image": "eau.jpg"
+    },
+    {
+      "id": 26,
+      "name": "Crayons",
+      "image": "crayons.jpeg"
+    },
+    {
+      "id": 27,
+      "name": "Bulles",
+      "image": "bulles.jpg"
+    },
+    {
+      "id": 28,
+      "name": "Fleurs",
+      "image": "fleurs.jpg"
+    },
+    {
+      "id": 29,
+      "name": "Crocodile",
+      "image": "croco.jpg"
+    },
+    {
+      "id": 30,
+      "name": "Balles",
+      "image": "balles.jpg"
+    },
+    {
+      "id": 31,
+      "name": "Lampe",
+      "image": "lampes.jpg"
+    },
+    {
+      "id": 32,
+      "name": "Piano",
+      "image": "piano.jpg"
+    },
+    {
+      "id": 33,
+      "name": "Doudou",
+      "image": "doudou.jpg"
+    },
+    {
+      "id": 34,
+      "name": "Banane",
+      "image": "banane.jpg"
+    },
+    {
+      "id": 35,
+      "name": "Biberon",
+      "image": "biberon.jpg"
+    },
+    {
+      "id": 36,
+      "name": "Bloc",
+      "image": "mega-bloc.png"
+    },
+    {
+      "id": 37,
+      "name": "Glissoire",
+      "image": "glissoire.jpg"
+    },
+    {
+      "id": 38,
+      "name": "Auto",
+      "image": "auto.png"
+    },
+    {
+      "id": 39,
+      "name": "Toast",
+      "image": "toast.jpg"
+    },
+    {
+      "id": 40,
+      "name": "Mures",
+      "image": "mures.jpg"
     }
   ]
 }
