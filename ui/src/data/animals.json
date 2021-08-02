@@ -341,32 +341,32 @@
       "image": "panier.jpg"
     },
     {
-      "id": 41,
+      "id": 64,
       "name": "Bouche",
       "image": "bouche.jpg"
     },
     {
-      "id": 42,
+      "id": 65,
       "name": "Cheveux",
       "image": "cheveux.jpg"
     },
     {
-      "id": 43,
+      "id": 66,
       "name": "Dents",
       "image": "dents.jpg"
     },
     {
-      "id": 44,
+      "id": 67,
       "name": "Nez",
       "image": "nez.jpg"
     },
     {
-      "id": 45,
+      "id": 68,
       "name": "Yeux",
       "image": "oeil.jpg"
     },
     {
-      "id": 46,
+      "id": 69,
       "name": "Oreille",
       "image": "oreille.jpg"
     }
