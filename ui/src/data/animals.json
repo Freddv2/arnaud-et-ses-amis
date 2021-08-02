@@ -207,7 +207,7 @@
     },
     {
       "id": 37,
-      "name": "Glissoire",
+      "name": "Glissade",
       "image": "glissoire.jpg"
     },
     {
@@ -339,6 +339,36 @@
       "id": 63,
       "name": "Panier de basket",
       "image": "panier.jpg"
+    },
+    {
+      "id": 41,
+      "name": "Bouche",
+      "image": "bouche.jpg"
+    },
+    {
+      "id": 42,
+      "name": "Cheveux",
+      "image": "cheveux.jpg"
+    },
+    {
+      "id": 43,
+      "name": "Dents",
+      "image": "dents.jpg"
+    },
+    {
+      "id": 44,
+      "name": "Nez",
+      "image": "nez.jpg"
+    },
+    {
+      "id": 45,
+      "name": "Yeux",
+      "image": "oeil.jpg"
+    },
+    {
+      "id": 46,
+      "name": "Oreille",
+      "image": "oreille.jpg"
     }
   ]
 }
